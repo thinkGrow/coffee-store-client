@@ -10,16 +10,25 @@ const SignUp = () => {
 
     const form = e.target;
     const formData = new FormData(form);
+    // const email = formData.get("email");
+    // const password = formData.get("password");
 
-    const email = formData.get("email");
-    const password = formData.get("password");
-    // const password = e.target.password.value;
-    console.log(email, password);
+    const { email, password, ...userProfile } = Object.fromEntries(
+      formData.entries()
+    );
+
+    console.log(email, password, userProfile);
 
     //create user in the firebase
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
+
+        // save profile info in the database
+        
+
+
+
       })
       .catch((error) => {
         console.log(error);
@@ -32,6 +41,29 @@ const SignUp = () => {
         <h1 className="text-5xl font-bold">Sign Up now!</h1>
 
         <form onSubmit={handleSignUp} className="fieldset">
+          <label className="label">Name</label>
+          <input type="text" className="input" name="name" placeholder="Name" />
+          <label className="label">Address</label>
+          <input
+            type="text"
+            className="input"
+            name="address"
+            placeholder="Address"
+          />
+          <label className="label">Phone</label>
+          <input
+            type="text"
+            className="input"
+            name="phone"
+            placeholder="Phone"
+          />
+          <label className="label">Photo URL</label>
+          <input
+            type="text"
+            className="input"
+            name="photo"
+            placeholder="Photo URL"
+          />
           <label className="label">Email</label>
           <input
             type="email"
