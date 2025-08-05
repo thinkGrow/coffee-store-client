@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser } = use(AuthContext);
@@ -25,10 +26,26 @@ const SignUp = () => {
         console.log(result.user);
 
         // save profile info in the database
-        
-
-
-
+        fetch("http://localhost:3000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userProfile),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your account has been created",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+            console.log("After profile is saved: ", data);
+          });
       })
       .catch((error) => {
         console.log(error);
