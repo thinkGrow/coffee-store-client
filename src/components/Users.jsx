@@ -26,6 +26,9 @@ const Users = () => {
             if (data.deletedCount) {
               const remainingUsers = users.filter((user) => user._id != id);
               setUsers(remainingUsers);
+
+              // To do : delete use from firebase
+
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
