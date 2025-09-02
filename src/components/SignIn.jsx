@@ -21,7 +21,7 @@ const SignIn = () => {
         };
 
         // update last sign in to the database
-        fetch("http://localhost:3000/users", {
+        fetch("https://coffee-store-server-peach-chi-73.vercel.app/users", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
